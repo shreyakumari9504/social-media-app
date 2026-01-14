@@ -1,0 +1,13 @@
+Django==4.2
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+
+channels
+channels-redis
+redis
+
+gunicorn
+pillow
+python-dotenv
+requests
