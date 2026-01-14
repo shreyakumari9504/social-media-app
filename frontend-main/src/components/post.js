@@ -7,7 +7,7 @@ import { toggleLike } from "../api/endpoints";
 
 import { useState } from "react";
 
-const Post = ({id, username, profile_image, description, formatted_date, liked, like_count}) => {
+const Post = ({ id, username, profile_image, description, formatted_date, liked, like_count }) => {
 
 
     const [clientLiked, setClientLiked] = useState(liked)
@@ -17,43 +17,43 @@ const Post = ({id, username, profile_image, description, formatted_date, liked, 
         const data = await toggleLike(id);
         if (data.now_liked) {
             setClientLiked(true)
-            setClientLikeCount(clientLikeCount+1)
+            setClientLikeCount(clientLikeCount + 1)
         } else {
             setClientLiked(false)
-            setClientLikeCount(clientLikeCount-1)
+            setClientLikeCount(clientLikeCount - 1)
         }
     }
- 
+
     return (
         <VStack w='400px' h='400px' border='1px solid' borderColor='gray.400' borderRadius='8px'>
             <HStack
-  w='100%'
-  flex='1'
-  borderBottom='1px solid'
-  borderColor='gray.300'
-  p='0 20px'
-  bg='gray.50'
-  borderRadius='8px 8px 0 0'
-  spacing={3}
->
-    <Box>
-        <img
-            src={
-                profile_image
-                ?`http://127.0.0.1:8000${profile_image}`
-            : "/default-avatar.png"
-        }
-            alt="profile"
-            style={{
-                width: "35px",
-                height: "35px",
-                borderRadius: "50%",
-                objectFit: "cover"
-            }}
-        />
-    </Box>
-    <Text fontWeight="bold">@{username}</Text>
-</HStack>
+                w='100%'
+                flex='1'
+                borderBottom='1px solid'
+                borderColor='gray.300'
+                p='0 20px'
+                bg='gray.50'
+                borderRadius='8px 8px 0 0'
+                spacing={3}
+            >
+                <Box>
+                    <img
+                        src={
+                            profile_image
+                                ? `${process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.replace('/api', '') : 'http://127.0.0.1:8000'}${profile_image}`
+                                : "/default-avatar.png"
+                        }
+                        alt="profile"
+                        style={{
+                            width: "35px",
+                            height: "35px",
+                            borderRadius: "50%",
+                            objectFit: "cover"
+                        }}
+                    />
+                </Box>
+                <Text fontWeight="bold">@{username}</Text>
+            </HStack>
 
             <Flex flex='6' w='100%' h='100%' justifyContent='center' alignItems='center'>
                 <Text textAlign='center'>{description}</Text>
@@ -63,12 +63,12 @@ const Post = ({id, username, profile_image, description, formatted_date, liked, 
                     <HStack >
                         <Box>
                             {
-                                clientLiked ? 
+                                clientLiked ?
                                     <Box color='red'>
                                         <FaHeart onClick={handleToggleLike} />
 
                                     </Box>
-                                :
+                                    :
                                     <FaRegHeart onClick={handleToggleLike} />
                             }
                         </Box>

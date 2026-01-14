@@ -8,6 +8,8 @@ channels-redis
 redis
 
 gunicorn
+daphne
+whitenoise
 pillow
 python-dotenv
 requests
